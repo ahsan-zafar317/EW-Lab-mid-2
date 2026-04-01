@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — FocusAI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-logo">🧠 FocusAI</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="app.html">Dashboard</a>
+    <a href="about.html">About</a>
+    <span class="nav-tier-badge" id="navTierBadge" style="background:rgba(100,116,139,0.12);color:#64748b;">FREE</span>
+    <button class="btn btn-upgrade" onclick="openUpgradeModal()" style="padding:8px 16px;font-size:0.8rem;border:none;cursor:pointer;">⚡ Upgrade</button>
+  </div>
+</nav>
+
+<div class="about-wrap">
+
+  <div class="about-hero">
+    <span class="section-label">// Our Mission</span>
+    <h1>Building the<br>Future of Focus</h1>
+    <p class="about-intro">
+      FocusAI was created to solve one of the most critical problems of the modern world —
+      the constant battle for your attention. Our mission is to give individuals tiered, intelligent
+      tools to reclaim control of their time and cognitive energy.
+    </p>
+  </div>
+
+  <div style="margin-bottom:60px;">
+    <span class="section-label">// Our System</span>
+    <h2 style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;margin-bottom:20px;letter-spacing:-0.02em;">Four tiers. One goal.</h2>
+    <p style="color:var(--muted);max-width:640px;line-height:1.7;font-size:0.95rem;">
+      We designed FocusAI around the principle that focus is earned — not given. Each tier represents a deeper
+      commitment to the craft of attention. The higher you go, the fewer escape routes remain.
+    </p>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px;">
+      <div style="padding:20px;border-radius:14px;border:1px solid rgba(100,116,139,0.2);background:rgba(100,116,139,0.04);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#64748b;font-weight:700;letter-spacing:0.1em;margin-bottom:10px;">FREE — BASIC</div>
+        <p style="font-size:0.82rem;color:var(--muted);line-height:1.5;">Manual blocking, 25-min sessions. The first step.</p>
+      </div>
+      <div style="padding:20px;border-radius:14px;border:1px solid rgba(34,197,94,0.15);background:rgba(34,197,94,0.04);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#22c55e;font-weight:700;letter-spacing:0.1em;margin-bottom:10px;">PRO — FLOW</div>
+        <p style="font-size:0.82rem;color:var(--muted);line-height:1.5;">Preset packs, unlimited blocking, custom durations.</p>
+      </div>
+      <div style="padding:20px;border-radius:14px;border:1px solid rgba(167,139,250,0.15);background:rgba(167,139,250,0.04);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#a78bfa;font-weight:700;letter-spacing:0.1em;margin-bottom:10px;">ELITE — DEEP</div>
+        <p style="font-size:0.82rem;color:var(--muted);line-height:1.5;">Website-level blocking, deep mode, distraction analytics.</p>
+      </div>
+      <div style="padding:20px;border-radius:14px;border:1px solid rgba(245,158,11,0.15);background:rgba(245,158,11,0.04);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#f59e0b;font-weight:700;letter-spacing:0.1em;margin-bottom:10px;">APEX</div>
+        <p style="font-size:0.82rem;color:var(--muted);line-height:1.5;">Full OS lockdown. AI-enforced. No escape.</p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <span class="section-label">// Founders</span>
+    <div class="founders-grid">
+
+      <div class="founder-card">
+        <span class="founder-role">Co-Founder & CEO</span>
+        <div class="founder-name">Haris</div>
+        <p>
+          Haris leads the vision behind FocusAI, with a deep interest in human performance,
+          discipline, and behavioral systems.
+        </p>
+        <p>
+          After observing how digital environments constantly compete for attention, he designed
+          a tiered system that matches the level of restriction to the depth of commitment — because
+          real focus requires real stakes.
+        </p>
+      </div>
+
+      <div class="founder-card">
+        <span class="founder-role">Co-Founder & CTO</span>
+        <div class="founder-name">Ahsan</div>
+        <p>
+          Ahsan leads technical development, building the responsive and scalable systems
+          that power FocusAI's intelligent blocking engine.
+        </p>
+        <p>
+          His focus is bridging the gap between human intention and execution — through smart
+          automation, clean system design, and deep OS-level integration that makes focus
+          impossible to ignore.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- UPGRADE MODAL -->
+<div class="modal-overlay" id="upgradeModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeUpgradeModal()">✕</button>
+    <div class="modal-title">Upgrade Your Focus</div>
+    <div class="modal-sub">Select a tier to unlock deeper focus capabilities.</div>
+    <div class="modal-tiers">
+      <div class="modal-tier-card tier-free" id="mcard-free" onclick="selectModalTier('free')">
+        <span class="tier-badge" style="background:rgba(100,116,139,0.12);color:#64748b;">Free</span>
+        <div class="modal-tier-name text-free">Basic</div>
+        <div class="modal-tier-price">$0 <small>/mo</small></div>
+        <ul class="modal-feature-list"><li><span class="fi">◦</span> 25-min timer</li><li><span class="fi">◦</span> 3 blocked apps</li></ul>
+      </div>
+      <div class="modal-tier-card tier-pro" id="mcard-pro" onclick="selectModalTier('pro')">
+        <span class="tier-badge" style="background:rgba(34,197,94,0.12);color:#22c55e;">Pro</span>
+        <div class="modal-tier-name text-pro">Flow</div>
+        <div class="modal-tier-price">$9 <small>/mo</small></div>
+        <ul class="modal-feature-list"><li><span class="fi">✓</span> Custom timers</li><li><span class="fi">✓</span> Unlimited blocking</li><li><span class="fi">✓</span> Preset packs</li></ul>
+      </div>
+      <div class="modal-tier-card tier-elite" id="mcard-elite" onclick="selectModalTier('elite')">
+        <span class="tier-badge" style="background:rgba(167,139,250,0.12);color:#a78bfa;">Elite</span>
+        <div class="modal-tier-name text-elite">Deep</div>
+        <div class="modal-tier-price">$19 <small>/mo</small></div>
+        <ul class="modal-feature-list"><li><span class="fi">✓</span> Website blocking</li><li><span class="fi">✓</span> Deep mode</li><li><span class="fi">✓</span> Distraction charts</li></ul>
+      </div>
+      <div class="modal-tier-card tier-apex" id="mcard-apex" onclick="selectModalTier('apex')">
+        <span class="tier-badge" style="background:rgba(245,158,11,0.12);color:#f59e0b;">Apex</span>
+        <div class="modal-tier-name text-apex">Apex</div>
+        <div class="modal-tier-price">$39 <small>/mo</small></div>
+        <ul class="modal-feature-list"><li><span class="fi">✓</span> OS lockdown</li><li><span class="fi">✓</span> AI predictions</li><li><span class="fi">✓</span> Biometric triggers</li></ul>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-primary" id="confirmUpgradeBtn" onclick="confirmUpgrade()">Confirm Upgrade</button>
+      <button class="btn btn-ghost" onclick="closeUpgradeModal()">Maybe later</button>
+      <span class="selected-tier-label" id="selectedTierLabel"></span>
+    </div>
+  </div>
+</div>
+
+<script src="tier.js"></script>
+<script>updateNavBadge();</script>
+</body>
+</html>

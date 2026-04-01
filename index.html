@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusAI — Master Your Attention</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-logo">🧠 FocusAI</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="app.html">Dashboard</a>
+    <a href="about.html">About</a>
+    <span class="nav-tier-badge" id="navTierBadge" style="background:rgba(100,116,139,0.12);color:#64748b;">FREE</span>
+    <a href="#upgrade" class="btn btn-upgrade" onclick="openUpgradeModal()" style="padding:8px 16px;font-size:0.8rem;">⚡ Upgrade</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-orb orb-1"></div>
+  <div class="hero-bg-orb orb-2"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Intelligent Focus System</div>
+    <h1>Master<br>Your <span>Attention.</span></h1>
+    <p>FocusAI eliminates distractions with tier-based focus control — the deeper your commitment, the more powerful your focus becomes.</p>
+    <div class="hero-cta">
+      <a href="app.html" class="btn btn-primary">⚡ Launch Dashboard</a>
+      <a href="#tiers" class="btn btn-ghost">View Tiers →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="feature-card">
+    <span class="feature-icon">🧠</span>
+    <h3>AI Focus Engine</h3>
+    <p>Detects distraction patterns in real-time and adapts your session dynamically.</p>
+  </div>
+  <div class="feature-card">
+    <span class="feature-icon">🚫</span>
+    <h3>Tiered Blocking</h3>
+    <p>From basic app blocking to full digital environment lockdown — unlocked by tier.</p>
+  </div>
+  <div class="feature-card">
+    <span class="feature-icon">📊</span>
+    <h3>Deep Analytics</h3>
+    <p>Track sessions, streaks, and cognitive performance over time.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TIERS -->
+<section class="tiers-section" id="tiers">
+  <div class="section-header">
+    <span class="section-label">// Focus Tiers</span>
+    <h2>The deeper you go,<br>the more you block.</h2>
+    <p>Each tier unlocks more aggressive focus tools — for those serious about peak performance.</p>
+  </div>
+
+  <div class="tiers-grid">
+
+    <!-- FREE -->
+    <div class="tier-card tier-free" id="tierCard-free">
+      <span class="tier-badge">Free</span>
+      <div class="tier-name">Basic</div>
+      <div class="tier-price">$0 <span>/mo</span></div>
+      <div class="tier-desc">Get started with a simple focus timer and manual app blocking.</div>
+      <ul class="tier-features">
+        <li><span class="check">✓</span> 25-min Pomodoro timer</li>
+        <li><span class="check">✓</span> Manual app list (up to 3)</li>
+        <li><span class="check">✓</span> Session counter</li>
+        <li class="locked">🔒 Custom timer durations</li>
+        <li class="locked">🔒 Preset distraction packs</li>
+        <li class="locked">🔒 Focus streaks</li>
+        <li class="locked">🔒 Deep mode</li>
+      </ul>
+      <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="setTier('free')">Current Plan</button>
+    </div>
+
+    <!-- PRO -->
+    <div class="tier-card tier-pro">
+      <span class="tier-badge">Pro</span>
+      <div class="tier-name">Flow</div>
+      <div class="tier-price">$9 <span>/mo</span></div>
+      <div class="tier-desc">Custom sessions, preset blocking packs, and focus analytics.</div>
+      <ul class="tier-features">
+        <li><span class="check">✓</span> Everything in Free</li>
+        <li><span class="check text-pro">✓</span> Custom timer (5–120 min)</li>
+        <li><span class="check text-pro">✓</span> Unlimited app blocking</li>
+        <li><span class="check text-pro">✓</span> Preset packs (Social, News, Gaming)</li>
+        <li><span class="check text-pro">✓</span> Focus streaks</li>
+        <li><span class="check text-pro">✓</span> Total focus analytics</li>
+        <li class="locked">🔒 Deep / Apex modes</li>
+      </ul>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="openUpgradeModal('pro')">Upgrade to Pro →</button>
+    </div>
+
+    <!-- ELITE -->
+    <div class="tier-card tier-elite popular">
+      <span class="tier-badge">Elite</span>
+      <div class="tier-name">Deep</div>
+      <div class="tier-price">$19 <span>/mo</span></div>
+      <div class="tier-desc">Aggressive blocking with site-level control and deep work modes.</div>
+      <ul class="tier-features">
+        <li><span class="check">✓</span> Everything in Pro</li>
+        <li><span class="check text-elite">✓</span> Website + domain blocking</li>
+        <li><span class="check text-elite">✓</span> Deep Focus mode (no breaks)</li>
+        <li><span class="check text-elite">✓</span> Phone notification muting</li>
+        <li><span class="check text-elite">✓</span> Distraction pattern reports</li>
+        <li><span class="check text-elite">✓</span> Session scheduling</li>
+        <li class="locked">🔒 Full OS lockdown (Apex only)</li>
+      </ul>
+      <button class="btn" style="width:100%;justify-content:center;background:linear-gradient(135deg,#a78bfa,#7c3aed);color:#fff;" onclick="openUpgradeModal('elite')">Upgrade to Elite →</button>
+    </div>
+
+    <!-- APEX -->
+    <div class="tier-card tier-apex">
+      <span class="tier-badge">Apex</span>
+      <div class="tier-name">Apex</div>
+      <div class="tier-price">$39 <span>/mo</span></div>
+      <div class="tier-desc">Full cognitive lockdown. AI-enforced. No escape hatches.</div>
+      <ul class="tier-features">
+        <li><span class="check">✓</span> Everything in Elite</li>
+        <li><span class="check text-apex">✓</span> Full OS environment lockdown</li>
+        <li><span class="check text-apex">✓</span> AI distraction prediction</li>
+        <li><span class="check text-apex">✓</span> Hardware-level focus mode</li>
+        <li><span class="check text-apex">✓</span> Biometric session triggers</li>
+        <li><span class="check text-apex">✓</span> Priority support</li>
+        <li><span class="check text-apex">✓</span> Custom blocking profiles</li>
+      </ul>
+      <button class="btn btn-upgrade" style="width:100%;justify-content:center;" onclick="openUpgradeModal('apex')">Go Apex →</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Your best work starts<br>with a single session.</h2>
+  <p>Join thousands building deep focus habits with FocusAI.</p>
+  <a href="app.html" class="btn btn-primary">Open Dashboard ⚡</a>
+</section>
+
+<!-- UPGRADE MODAL -->
+<div class="modal-overlay" id="upgradeModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeUpgradeModal()">✕</button>
+    <div class="modal-title">Upgrade Your Focus</div>
+    <div class="modal-sub">Select a tier and unlock deeper blocking capabilities.</div>
+
+    <div class="modal-tiers">
+      <div class="modal-tier-card tier-free" id="mcard-free" onclick="selectModalTier('free')">
+        <span class="tier-badge" style="background:rgba(100,116,139,0.12);color:#64748b;">Free</span>
+        <div class="modal-tier-name text-free">Basic</div>
+        <div class="modal-tier-price">$0 <small>/mo</small></div>
+        <ul class="modal-feature-list">
+          <li><span class="fi">◦</span> 25-min timer</li>
+          <li><span class="fi">◦</span> 3 blocked apps</li>
+          <li><span class="fi">◦</span> Basic stats</li>
+        </ul>
+      </div>
+
+      <div class="modal-tier-card tier-pro" id="mcard-pro" onclick="selectModalTier('pro')">
+        <span class="tier-badge" style="background:rgba(34,197,94,0.12);color:#22c55e;">Pro</span>
+        <div class="modal-tier-name text-pro">Flow</div>
+        <div class="modal-tier-price">$9 <small>/mo</small></div>
+        <ul class="modal-feature-list">
+          <li><span class="fi">✓</span> Custom timer durations</li>
+          <li><span class="fi">✓</span> Unlimited blocking</li>
+          <li><span class="fi">✓</span> Preset packs</li>
+          <li><span class="fi">✓</span> Focus streaks</li>
+        </ul>
+      </div>
+
+      <div class="modal-tier-card tier-elite" id="mcard-elite" onclick="selectModalTier('elite')">
+        <span class="tier-badge" style="background:rgba(167,139,250,0.12);color:#a78bfa;">Elite</span>
+        <div class="modal-tier-name text-elite">Deep</div>
+        <div class="modal-tier-price">$19 <small>/mo</small></div>
+        <ul class="modal-feature-list">
+          <li><span class="fi">✓</span> Website blocking</li>
+          <li><span class="fi">✓</span> Deep Focus mode</li>
+          <li><span class="fi">✓</span> Distraction reports</li>
+          <li><span class="fi">✓</span> Session scheduling</li>
+        </ul>
+      </div>
+
+      <div class="modal-tier-card tier-apex" id="mcard-apex" onclick="selectModalTier('apex')">
+        <span class="tier-badge" style="background:rgba(245,158,11,0.12);color:#f59e0b;">Apex</span>
+        <div class="modal-tier-name text-apex">Apex</div>
+        <div class="modal-tier-price">$39 <small>/mo</small></div>
+        <ul class="modal-feature-list">
+          <li><span class="fi">✓</span> OS-level lockdown</li>
+          <li><span class="fi">✓</span> AI predictions</li>
+          <li><span class="fi">✓</span> Biometric triggers</li>
+          <li><span class="fi">✓</span> Custom profiles</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-primary" id="confirmUpgradeBtn" onclick="confirmUpgrade()">Confirm Upgrade</button>
+      <button class="btn btn-ghost" onclick="closeUpgradeModal()">Maybe later</button>
+      <span class="selected-tier-label" id="selectedTierLabel"></span>
+    </div>
+  </div>
+</div>
+
+<script src="tier.js"></script>
+<script>
+  updateNavBadge();
+</script>
+</body>
+</html>

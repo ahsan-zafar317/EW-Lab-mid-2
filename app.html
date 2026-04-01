@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusAI — Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-logo">🧠 FocusAI</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="app.html">Dashboard</a>
+    <a href="about.html">About</a>
+    <span class="nav-tier-badge" id="navTierBadge" style="background:rgba(100,116,139,0.12);color:#64748b;">FREE</span>
+    <button class="btn btn-upgrade" onclick="openUpgradeModal()" style="padding:8px 16px;font-size:0.8rem;border:none;cursor:pointer;">⚡ Upgrade</button>
+  </div>
+</nav>
+
+<div class="dashboard-wrapper">
+
+  <div class="dashboard-header">
+    <div>
+      <h1 id="dashGreeting">Deep Focus Dashboard</h1>
+      <div style="color:var(--muted);font-size:0.82rem;margin-top:4px;" id="tierCapDesc">Basic plan — 25-min sessions, 3 blocked apps</div>
+    </div>
+    <div class="tier-indicator">
+      <span class="current-tier-badge" id="currentTierBadge">FREE</span>
+      <button class="btn btn-ghost" onclick="openUpgradeModal()" style="font-size:0.8rem;padding:8px 16px;cursor:pointer;">Upgrade Plan →</button>
+    </div>
+  </div>
+
+  <!-- TIER PROGRESS TRACK -->
+  <div class="panel tier-progress-panel" style="margin-bottom:20px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+      <div class="panel-title">Focus Tier</div>
+      <button onclick="openUpgradeModal()" style="background:none;border:none;color:var(--muted);font-size:0.78rem;cursor:pointer;font-family:'Space Grotesk',sans-serif;">Change plan →</button>
+    </div>
+    <div class="tier-track" id="tierTrack">
+      <div class="tier-step" data-tier="free">
+        <div class="tier-step-dot" id="dot-free">FREE</div>
+        <div class="tier-step-name">Basic</div>
+      </div>
+      <div class="tier-step" data-tier="pro">
+        <div class="tier-step-dot" id="dot-pro">PRO</div>
+        <div class="tier-step-name">Flow</div>
+      </div>
+      <div class="tier-step" data-tier="elite">
+        <div class="tier-step-dot" id="dot-elite">ELITE</div>
+        <div class="tier-step-name">Deep</div>
+      </div>
+      <div class="tier-step" data-tier="apex">
+        <div class="tier-step-dot" id="dot-apex">APEX</div>
+        <div class="tier-step-name">Apex</div>
+      </div>
+    </div>
+    <div id="tierUnlocksRow" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;"></div>
+  </div>
+
+  <div class="dashboard-grid">
+
+    <!-- ── TIMER PANEL ── -->
+    <div class="panel">
+      <div class="panel-title">Deep Focus Timer</div>
+
+      <!-- Mode selector (unlocked per tier) -->
+      <div class="timer-mode-selector" id="modeSelector">
+        <button class="mode-btn active-mode" data-minutes="25" onclick="setTimerMode(25, this)">25 min</button>
+        <button class="mode-btn" id="mode50" data-minutes="50" onclick="setTimerMode(50, this)">50 min</button>
+        <button class="mode-btn" id="mode90" data-minutes="90" onclick="setTimerMode(90, this)">90 min <span class="lock-icon">🔒</span></button>
+        <button class="mode-btn" id="modeDeep" data-minutes="120" onclick="setTimerMode(120, this)">Deep ∞ <span class="lock-icon">🔒</span></button>
+      </div>
+
+      <div class="timer-display" id="timer">25:00</div>
+
+      <div class="timer-controls">
+        <button class="btn-sm btn-start" onclick="startTimer()">▶ Start</button>
+        <button class="btn-sm btn-stop" onclick="stopTimer()">■ Stop</button>
+        <button class="btn-sm btn-reset" onclick="resetTimer()">↺ Reset</button>
+      </div>
+
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+        <div style="font-size:0.75rem;color:var(--muted);margin-bottom:8px;font-family:'JetBrains Mono',monospace;letter-spacing:0.05em;">SESSION PHASE</div>
+        <div style="display:flex;gap:8px;">
+          <div style="flex:1;padding:8px;border-radius:8px;background:var(--surface);border:1px solid var(--border);font-size:0.75rem;text-align:center;">
+            <div style="font-size:1.1rem;font-weight:700;font-family:'JetBrains Mono',monospace;" id="phaseDisplay">FOCUS</div>
+            <div style="color:var(--muted);font-size:0.68rem;margin-top:2px;">Current</div>
+          </div>
+          <div style="flex:1;padding:8px;border-radius:8px;background:var(--surface);border:1px solid var(--border);font-size:0.75rem;text-align:center;" id="breakPanel">
+            <div style="font-size:1.1rem;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--muted);" id="breakDisplay">5:00</div>
+            <div style="color:var(--muted);font-size:0.68rem;margin-top:2px;">Break</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BLOCKER PANEL ── -->
+    <div class="panel" style="position:relative;">
+      <div class="panel-title">Blocked Environments</div>
+
+      <!-- Free: basic manual blocking -->
+      <div id="basicBlocker">
+        <div class="blocker-input-row">
+          <input class="app-input" id="appInput" placeholder="Add app or site..." />
+          <button class="btn-sm btn-start" onclick="addApp()" style="white-space:nowrap;">+ Block</button>
+        </div>
+        <div id="freeLimit" style="font-size:0.72rem;color:var(--muted);margin-bottom:10px;font-family:'JetBrains Mono',monospace;"></div>
+        <ul class="blocked-apps-list" id="appList"></ul>
+      </div>
+
+      <!-- Preset packs (Pro+) -->
+      <div id="presetSection" style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);">
+        <div style="font-size:0.72rem;color:var(--muted);margin-bottom:8px;font-family:'JetBrains Mono',monospace;letter-spacing:0.05em;display:flex;justify-content:space-between;align-items:center;">
+          <span>PRESET PACKS</span>
+          <span id="presetLockLabel" style="color:#a78bfa;font-size:0.65rem;cursor:pointer;" onclick="openUpgradeModal('pro')"></span>
+        </div>
+        <div class="preset-tags" id="presetTags">
+          <span class="preset-tag" id="preset-social" onclick="addPreset('social')">📱 Social</span>
+          <span class="preset-tag" id="preset-news" onclick="addPreset('news')">📰 News</span>
+          <span class="preset-tag" id="preset-gaming" onclick="addPreset('gaming')">🎮 Gaming</span>
+          <span class="preset-tag" id="preset-streaming" onclick="addPreset('streaming')">🎬 Streaming</span>
+          <span class="preset-tag" id="preset-shopping" onclick="addPreset('shopping')">🛍 Shopping</span>
+        </div>
+      </div>
+
+      <!-- Deep mode lock (Elite+) -->
+      <div id="deepModeSection" style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);">
+        <div style="font-size:0.72rem;color:var(--muted);margin-bottom:8px;font-family:'JetBrains Mono',monospace;letter-spacing:0.05em;">DEEP LOCK</div>
+        <div id="deepLockContent">
+          <div style="padding:12px;border-radius:10px;border:1px solid rgba(167,139,250,0.15);background:rgba(167,139,250,0.04);display:flex;align-items:center;gap:12px;">
+            <div style="font-size:1.2rem;">🌐</div>
+            <div style="flex:1;">
+              <div style="font-size:0.82rem;font-weight:600;">Website Blocking</div>
+              <div style="font-size:0.72rem;color:var(--muted);">Block any domain during sessions</div>
+            </div>
+            <div id="webBlockToggle"></div>
+          </div>
+          <div style="margin-top:8px;padding:12px;border-radius:10px;border:1px solid rgba(245,158,11,0.1);background:rgba(245,158,11,0.03);display:flex;align-items:center;gap:12px;">
+            <div style="font-size:1.2rem;">💻</div>
+            <div style="flex:1;">
+              <div style="font-size:0.82rem;font-weight:600;">OS Lockdown</div>
+              <div style="font-size:0.72rem;color:var(--muted);">Full environment control</div>
+            </div>
+            <div id="osLockToggle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ANALYTICS PANEL ── -->
+    <div class="panel">
+      <div class="panel-title">Analytics</div>
+
+      <div class="stat-row">
+        <div class="stat-num" id="sessions" style="color:var(--pro);">0</div>
+      </div>
+      <div class="stat-label">Sessions completed today</div>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="progressBar"></div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-num" id="focusTime" style="color:var(--elite);font-size:2rem;">0</div>
+        <div style="color:var(--muted);font-size:0.85rem;align-self:flex-end;padding-bottom:4px;">mins</div>
+      </div>
+      <div class="stat-label">Total focus time</div>
+
+      <!-- Streak (Pro+) -->
+      <div class="streak-box" id="streakBox">
+        <div class="streak-emoji">🔥</div>
+        <div class="streak-info">
+          <strong id="streakCount">0 day streak</strong>
+          Daily focus habit
+        </div>
+      </div>
+
+      <!-- Deep analytics (Elite+) -->
+      <div id="deepAnalytics" style="padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--surface);">
+        <div style="font-size:0.72rem;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.05em;margin-bottom:8px;">DISTRACTION PATTERN</div>
+        <div id="distractionChart" style="display:flex;gap:4px;align-items:flex-end;height:48px;">
+          <!-- bars rendered by JS -->
+        </div>
+        <div style="font-size:0.68rem;color:var(--muted);margin-top:6px;" id="distractionNote">Complete sessions to see patterns</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- UPGRADE MODAL (shared) -->
+<div class="modal-overlay" id="upgradeModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeUpgradeModal()">✕</button>
+    <div class="modal-title">Upgrade Your Focus</div>
+    <div class="modal-sub">Select a tier to unlock more powerful blocking tools.</div>
+    <div class="modal-tiers">
+      <div class="modal-tier-card tier-free" id="mcard-free" onclick="selectModalTier('free')">
+        <span class="tier-badge" style="background:rgba(100,116,139,0.12);color:#64748b;">Free</span>
+        <div class="modal-tier-name text-free">Basic</div>
+        <div class="modal-tier-price">$0 <small>/mo</small></div>
+        <ul class="modal-feature-list">
+          <li><span class="fi">◦</span> 25-min timer</li>
+          <li><span class="fi">◦</span> 3 blocked apps</li>
+          <li><span class="fi">◦</span> Basic stats</li>
+        </ul>
+      </div>
+      <div class="modal-tier-card tier-pro" id="mcard-pro" onclick="selectModalTier('pro')">
+        <span class="tier-badge" style="background:rgba(34,197,94,0.12);color:#22c55e;">Pro</span>
+        <div class="modal-tier-name text-pro">Flow</div>
+        <div class="modal-tier-price">$9 <small>/mo</small></div>
+        <ul class="modal-feature-list">
+          <li><span class="fi">✓</span> Custom timer durations</li>
+          <li><span class="fi">✓</span> Unlimited blocking</li>
+          <li><span class="fi">✓</span> Preset packs</li>
+          <li><span class="fi">✓</span> Focus streaks</li>
+        </ul>
+      </div>
+      <div class="modal-tier-card tier-elite" id="mcard-elite" onclick="selectModalTier('elite')">
+        <span class="tier-badge" style="background:rgba(167,139,250,0.12);color:#a78bfa;">Elite</span>
+        <div class="modal-tier-name text-elite">Deep</div>
+        <div class="modal-tier-price">$19 <small>/mo</small></div>
+        <ul class="modal-feature-list">
+          <li><span class="fi">✓</span> Website blocking</li>
+          <li><span class="fi">✓</span> Deep Focus mode</li>
+          <li><span class="fi">✓</span> Distraction reports</li>
+          <li><span class="fi">✓</span> Session scheduling</li>
+        </ul>
+      </div>
+      <div class="modal-tier-card tier-apex" id="mcard-apex" onclick="selectModalTier('apex')">
+        <span class="tier-badge" style="background:rgba(245,158,11,0.12);color:#f59e0b;">Apex</span>
+        <div class="modal-tier-name text-apex">Apex</div>
+        <div class="modal-tier-price">$39 <small>/mo</small></div>
+        <ul class="modal-feature-list">
+          <li><span class="fi">✓</span> OS-level lockdown</li>
+          <li><span class="fi">✓</span> AI predictions</li>
+          <li><span class="fi">✓</span> Biometric triggers</li>
+          <li><span class="fi">✓</span> Custom profiles</li>
+        </ul>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-primary" id="confirmUpgradeBtn" onclick="confirmUpgrade()">Confirm Upgrade</button>
+      <button class="btn btn-ghost" onclick="closeUpgradeModal()">Maybe later</button>
+      <span class="selected-tier-label" id="selectedTierLabel"></span>
+    </div>
+  </div>
+</div>
+
+<script src="tier.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
